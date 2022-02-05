@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="css/user.css" />
+		<link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css">
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+		<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+		<script src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
+
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<div style="display: flex;justify-content: flex-start;" class="my-3">
+					<button id="btn">新增</button>
+					<div id="choiceWindow">
+						<form>
+					
+							<div class="form-group row my-3">
+								<label for="inputName" class="col-sm-2 col-form-label">用户名</label>
+								<div class="col-sm-5">
+									<input type="text" class="form-control" id="inputName">
+								</div>
+							</div>
+							<div class="form-group row my-3">
+								<label for="inputIncome" class="col-sm-2 col-form-label">姓名</label>
+								<div class="col-sm-5">
+									<input type="text" class="form-control" id="inputIncome">
+								</div>
+							</div>
+							<div class="form-group row my-3">
+								<label for="inputType" class="col-sm-2 col-form-label">角色</label>
+								<div class="col-sm-5">
+									<input type="text" class="form-control" id="inputType">
+								</div>
+							</div>
+							<div class="col-sm-12" style="display: flex;justify-content:center;">
+								<button type="button" class="btn btn-primary " style="margin: 10px;">确认</button>
+								<button type="button" id="x" class="btn btn-primary " style="margin: 10px;">取消</button>
+							</div>
+						</form>
+					</div>
+					<div id="backGround"></div>
+				</div>
+			</div>
+			<!-- 表格 -->
+			<div class="row table-resopnsive p-4">
+				<table class="table table-bordered" id="table">
+					<thead class="table-light"></thead>
+				</table>
+			</div>
+		</div>
+	</body>
+</html>
+<script>
+	
+	$('#table').bootstrapTable("hideLoading");
+	$("#table").bootstrapTable({
+
+		search: false,
+		pagination: false,
+		pageSize: 15,
+		pageList: [5, 10, 15, 20],
+		showColumns: false,
+		showRefresh: false,
+		showToggle: false,
+		locale: "zh-CN",
+		striped: false,
+		columns: [{
+				field: 'id',
+				title: 'ID'
+			}, {
+				field: 'user',
+				title: 'User'
+			}, {
+				field: 'name',
+				title: 'Name'
+			}, {
+				field: 'character',
+				title: 'Character'
+			}, 
+			{
+				field: 'operate',
+				title: '操作',
+				align: 'center',
+				valign: 'middle',
+				width: 200,
+				events: {
+					'click #edit': function(e, value, row, index) {
+						$('#id').val(row.Id);
+						$('#user').val(row.User);
+						$('#name').val(row.Name);
+						$('#character').val(row.Character);
+						
+					},
+					'click #delete': function(e, value, row, index) {
+						deleteInfo(row.Id);
+					}
+				},
+				formatter: function(value, row, index) {
+					var result = "";
+					result +=
+						'<button id="edit" class="btn btn-info" data-toggle="modal" data-target="#editModal">编辑</button>';
+					result +=
+						'<button id="delete" class="btn btn-danger" style="margin-left:10px;">删除</button>';
+					return result;
+				}
+			}
+
+		],
+		data: [{
+				id: 1,
+				user: 'dsad',
+				name: '1111',
+				type: '$1',
+				character: 'ss'
+
+			}, {
+				id: 2,
+				user: 'dsad',
+				name: '1111',
+				type: '$2',
+				character: 'ss'
+
+			},
+			{
+				id: 3,
+				user: 'dsad',
+				name: '1111',
+				type: '$3',
+				character: 'ss'
+
+			},
+
+		]
+	});
+	// 修改信息
+	function editInfo() {
+		$.ajax({
+			type: 'post',
+			url: 'ashx/EditHandler.ashx',
+			dataType: 'json',
+			data: {
+				id:$('#id').val(),
+				user:$('#user').val(),
+				name:$('#name').val(),
+				character:$('#character').val(),
+				
+				
+				// id: $('#id').val(),
+				// name: $('#name').val(),
+				// gender: $('#gender').val(),
+				// age: $('#age').val()
+			},
+			success: function(data) {
+				if (data == 'Yes') {
+					$('#table').bootstrapTable('refresh');
+					$('#editModal').modal('hide');
+				} else {
+					alert('修改失败');
+				}
+			}
+		})
+	}
+
+	// 删除信息
+	function deleteInfo(id) {
+		$.ajax({
+			type: 'post',
+			url: 'ashx/DeleteHandler.ashx',
+			dataType: 'json',
+			data: {
+				id: id
+			},
+			success: function(data) {
+				if (data == 'Yes') {
+					$('#table').bootstrapTable('refresh');
+				} else {
+					alert('删除失败');
+				}
+			}
+		})
+	}
+
+	$(document).ready(function() {
+		$("#btn").click(function() {
+			$("#choiceWindow").slideDown(300);
+			$("#backGround").show();
+
+		});
+
+		$("#x").click(function() {
+			$("#choiceWindow").slideUp(300);
+			$("#backGround").hide();
+		})
+
+	});
+</script>

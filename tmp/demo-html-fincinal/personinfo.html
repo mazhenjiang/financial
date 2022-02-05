@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>个人信息</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+		<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+	</head>
+
+	<body>
+		<div class="container-fluid">
+			<div class="row" style="padding: 10px;">
+				<!-- 左侧个人信息 -->
+				<div class="card col-sm-3 border border-2" style="padding: 10px; ">
+					<div class="card-header text-left">
+						<h3>个人资料</h3>
+					</div>
+					<div class="text-center" style="padding: 10px;">
+						<img id="pic" style="width:100px;height:100px;border-radius:50%;"
+							class="mx-auto d-block rounded-circle"
+							src="https://www.runoob.com/try/demo_source/paris.jpg">
+						<input id="upload" name="file" accept="image/*" type="file" style="display: none">
+					</div>
+					<ul class="list-group ">
+						<li class="list-group-item" style="display: flex;justify-content: space-between;">
+							<span>登录名称:</span>
+							<span>《用户名》</span>
+						</li>
+						<li class="list-group-item" style="display: flex;justify-content: space-between;">
+							<span>邮箱地址:</span>
+							<span>《邮箱》</span>
+						</li>
+						<li class="list-group-item" style="display: flex;justify-content: space-between;">
+							<span>手机号码:</span>
+							<span>《手机号》</span>
+						</li>
+						<li class="list-group-item" style="display: flex;justify-content: space-between;">
+							<span>创建时间:</span>
+							<span>《时间》</span>
+						</li>
+					</ul>
+				</div>
+				<!-- 右侧展示内容 -->
+				<div class="col-sm-9 " style="padding: 10px;">
+					<div class="card">
+						<div class="card-header active ">
+							<h3>基本资料</h3>
+						</div>
+						<ul class="nav nav-tabs" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" data-bs-toggle="tab" href="#home">基本资料</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" data-bs-toggle="tab" href="#menu1">修改密码</a>
+							</li>
+						</ul>
+
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<div id="home" class="container tab-pane active"><br>
+								<div class="row p-3">
+									<label class="col-sm-2 control-label ">用户名称：</label>
+									<div class="col-sm-10">
+										<input class="form-control" type="text" name="userName" id="userName"
+											placeholder="请输入用户名" />
+									</div>
+								</div>
+								<div class="row p-3">
+									<label class="col-sm-2 control-label ">手机号码</label>
+									<div class="col-sm-10">
+										<input class="form-control" type="text" name="userNumber" id="userNumber"
+											placeholder="请输入手机号码" />
+									</div>
+								</div>
+								<div class="row p-3">
+									<label class="col-sm-2 control-label ">邮箱号：</label>
+									<div class="col-sm-10">
+										<input class="form-control" type="text" name="userMail" id="userMail"
+											placeholder="请输入邮箱号码" />
+									</div>
+								</div>
+								<div class="row p-3">
+									<label class="col-sm-2 control-label ">性别</label>
+									<div class="col-sm-10">
+										<input class="radio-box" type="radio" id="radio1" name="sex" value="0" />
+										<label for="radio1">男</label>
+										<input class="radio-box" type="radio" id="radio2" name="sex" value="1" />
+										<label for="radio2">女</label>
+									</div>
+								</div>
+								<div class="row p-3 " style="display: flex;justify-content:space-around;">
+									<button type="button" class="btn btn-sm btn-primary col-sm-4" style="height: 30px;"
+										onclick="SubmitUserInfo()" value="确认">确认</button>
+									<button type="button" class="btn btn-sm btn-primary col-sm-4"
+										onclick="SubmitUserInfo()" value="取消">取消</button>
+								</div>
+							</div>
+							<div id="menu1" class="container tab-pane fade"><br>
+								<div class="row p-3">
+									<label class="col-sm-2 control-label ">旧密码：</label>
+									<div class="col-sm-10">
+										<input class="form-control" type="text" name="oldpassword" id="oldpassword"
+											placeholder="请输入旧密码" />
+									</div>
+								</div>
+								<div class="row p-3">
+									<label class="col-sm-2 control-label ">新密码</label>
+									<div class="col-sm-10">
+										<input class="form-control" type="text" name="newpassword" id="newpassword"
+											placeholder="请输入新密码" />
+									</div>
+								</div>
+								<div class="row p-3">
+									<label class="col-sm-2 control-label ">确认密码：</label>
+									<div class="col-sm-10">
+										<input class="form-control" type="text" name="enterpassword" id="enterpassword"
+											placeholder="请确认密码" />
+									</div>
+								</div>
+								<div class="row p-3 " style="display: flex;justify-content:space-around;">
+									<button type="button" class="btn btn-sm btn-primary col-sm-4" style="height: 30px;"
+										onclick="SubmitUserInfo()" value="确认">确认</button>
+									<button type="button" class="btn btn-sm btn-primary col-sm-4"
+										onclick="SubmitUserInfo()" value="取消">取消</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script>
+	$(function() {
+		$("#pic").click(function() {
+			$("#upload").click(); //隐藏了input:file样式后，点击头像就可以本地上传
+			$("#upload").on("change", function() {
+				var objUrl = getObjectURL(this.files[0]); //获取图片的路径，该路径不是图片在本地的路径
+				if (objUrl) {
+					$("#pic").attr("src", objUrl); //将图片路径存入src中，显示出图片
+					upimg();
+				}
+			});
+		});
+	});
+
+	//建立一?可存取到?file的url
+	function getObjectURL(file) {
+		var url = null;
+		if (window.createObjectURL != undefined) { // basic
+			url = window.createObjectURL(file);
+		} else if (window.URL != undefined) { // mozilla(firefox)
+			url = window.URL.createObjectURL(file);
+		} else if (window.webkitURL != undefined) { // webkit or chrome
+			url = window.webkitURL.createObjectURL(file);
+		}
+		return url;
+	}
+	//上传头像到服务器
+	function upimg() {
+		console.log(344)
+		var pic = $('#upload')[0].files[0];
+		var file = new FormData();
+		file.append('image', pic);
+		$.ajax({
+			url: "/uploadImg",
+			type: "post",
+			data: file,
+			cache: false,
+			contentType: false,
+			processData: false,
+			success: function(data) {
+				console.log(data);
+				var res = data;
+				$("#resimg").append("<img src='/" + res + "'>")
+			}
+		});
+	}
+</script>

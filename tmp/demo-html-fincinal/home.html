@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<!-- 顶部 -->
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="card">
+						<div class="card-header">欢迎，《系统管理员》:《用户名》! 本次登陆时间为:<span id="localTime"></span></div>
+					</div>
+				</div>
+			</div>
+			<!-- 排行 -->
+			<h2 class="page-header my-2" style="">排行版</h2>
+			<!-- 卡片 -->
+			<div class="row ">
+				<div class="col-sm-3 bg-info p-2">
+					<div class="card">
+						<div class="card-header text-center">收入</div>
+						<div class="card-body">
+							<div style="display: flex; flex-direction: row;justify-content: space-between;">
+								<span>马振寰</span>
+								<span>1000元</span>
+							</div>
+						</div>
+						<div class="card-body">内容</div>
+						<div class="card-body">内容</div>
+						<div class="card-body">内容</div>
+					</div>
+				</div>
+				<div class="col-sm-3 bg-info p-2">
+					<div class="card">
+						<div class="card-header text-center">消费</div>
+						<div class="card-body">内容</div>
+						<div class="card-body">内容</div>
+						<div class="card-body">内容</div>
+						<div class="card-body">内容</div>
+					</div>
+				</div>
+				<div class="col-sm-3 bg-info p-2">
+					<div class="card">
+						<div class="card-header text-center">净收入</div>
+						<div class="card-body">内容</div>
+						<div class="card-body">内容</div>
+						<div class="card-body">内容</div>
+						<div class="card-body">内容</div>
+					</div>
+				</div>
+				<div class="col-sm-3 bg-info p-2">
+					<div class="card">
+						<div class="card-header text-center">支出方式</div>
+						<div class="card-body">内容</div>
+						<div class="card-body">内容</div>
+						<div class="card-body">内容</div>
+						<div class="card-body">内容</div>
+					</div>
+				</div>
+			</div>
+			<!-- 数据统计 -->
+			<h2 class="page-header my-2" style="">数据统计</h2>
+
+			<!-- 图表区 -->
+			<div class="row" style="display: flex;justify-content:space-between;">
+				<div class="col-sm-6  w-25 ">
+					<h5 class="text-center">本月收支图</h5>
+					<canvas id="myChartPie"></canvas>
+				</div>
+				<div class="col-sm-6 ">
+					<h5 class="text-center">本月收支对比</h5>
+					<canvas id="myChartBar"></canvas>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	var add = setInterval("getTime()", 1000);
+	//这个函数主要是获取时间然后写入div中
+	function getTime() {
+		var date = new Date().toLocaleString(); //创建date对象，获取时间	
+		var id1 = document.getElementById("localTime"); //通过div标签的id多去div标签
+		id1.innerHTML = date; //将时间通过innerHTML属性写入div标签中
+	}
+
+
+	// 饼状图初始化
+	var ctxPie = document.getElementById('myChartPie').getContext('2d');
+	var myPieChart = new Chart(ctxPie, {
+		type: "pie",
+		data: {
+			datasets: [{
+				data: [70, 30],
+				backgroundColor: [
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(54, 162, 235, 0.2)',
+					'rgba(255, 206, 86, 0.2)',
+					'rgba(75, 192, 192, 0.2)',
+					'rgba(153, 102, 255, 0.2)',
+					'rgba(255, 159, 64, 0.2)'
+				],
+				borderColor: [
+					'rgba(255,99,132,1)',
+					'rgba(54, 162, 235, 1)',
+					'rgba(255, 206, 86, 1)',
+					'rgba(75, 192, 192, 1)',
+					'rgba(153, 102, 255, 1)',
+					'rgba(255, 159, 64, 1)'
+				],
+			}],
+
+			// These labels appear in the legend and in the tooltips when hovering different arcs
+			labels: ["支出", "收入"],
+
+		},
+		options: {},
+
+	});
+
+
+	// 柱状图初始化
+	var ctxBar = document.getElementById("myChartBar");
+	var myChart = new Chart(ctxBar, {
+		type: 'bar',
+		data: {
+			labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+			datasets: [{
+
+					label: "收入",
+
+					backgroundColor: "#3e95cd",
+
+					data: [2478]
+
+				}, {
+
+					label: "支出",
+
+					backgroundColor: "#8e5ea2",
+
+					data: [734]
+
+				},
+				{
+
+					label: "净收入",
+
+					backgroundColor: "#ffff00",
+
+					data: [734]
+
+				}
+			]
+		},
+		options: {
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true
+					}
+				}]
+			}
+		}
+	});
+</script>

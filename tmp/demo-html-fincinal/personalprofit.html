@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css">
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+		<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+		<script src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
+
+		<style>
+			.info {
+				display: none;
+				width: 60%;
+				height: 60%;
+				line-height: 100px;
+				text-align: center;
+				position: absolute;
+				top: 50%;
+				z-index: 2;
+				background-color: #ecffe4;
+				margin-top: -200px;
+
+				margin-right: 130px;
+				border-radius: 10px
+			}
+
+			.mask {
+				display: none;
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				background-color: rgba(0, 0, 0, 0.4);
+				z-index: 1;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container" id="background">
+			<!-- 顶部搜素 -->
+			<div class="row">
+				<form>
+					<div class="form-row" style="display: flex;justify-content: flex-start;">
+						<div class="form-group col-sm-3 p-3">
+							<input type="text" class="form-control" placeholder="日期">
+						</div>
+						<div class="form-group col-sm-3 p-3">
+							<input type="password" class="form-control" placeholder="姓名">
+						</div>
+
+						<div class="form-group col-sm-3 p-3">
+							<input type="password" class="form-control" placeholder="支付方式">
+						</div>
+						<div class="form-group col-sm-3 p-3">
+							<input type="password" class="form-control" placeholder="备注">
+						</div>
+					</div>
+					<div class="form-row" style="display: flex;justify-content:space-between;">
+						<div class="col-sm-12" style="display: flex;justify-content:flex-end;">
+							<button type="button" class="btn btn-primary " style="margin: 10px;">搜索</button>
+							<button type="button" class="btn btn-primary " style="margin: 10px;">重置</button>
+						</div>
+
+					</div>
+				</form>
+
+			</div>
+			<!-- 表单显示 -->
+			<div class="row table-resopnsive p-4">
+				<table class="table table-bordered" id="table">
+					<thead class="table-light"></thead>
+				</table>
+			</div>
+		</div>
+	</body>
+</html>
+<script>
+	$('#table').bootstrapTable("hideLoading");
+	$("#table").bootstrapTable({
+
+		search: false,
+		pagination: false,
+		pageSize: 15,
+		pageList: [5, 10, 15, 20],
+		showColumns: false,
+		showRefresh: false,
+		showToggle: false,
+		locale: "zh-CN",
+		striped: false,
+		columns: [{
+				field: 'id',
+				title: 'ID'
+			}, {
+				field: 'name',
+				title: 'Name'
+			}, {
+				field: 'income',
+				title: 'Income'
+			}, {
+				field: 'outcome',
+				title: 'Outcome'
+			},{
+				field: 'type',
+				title: 'Type'
+			}, {
+				field: 'date',
+				title: 'Date'
+			}, {
+				field: 'tag',
+				title: 'Tag'
+			}
+		],
+		data: [{
+				id: 1,
+				name: '1',
+				income: '$1',
+				outcome:'$1',
+				type: '$1',
+				date: '2011',
+				tag: '',
+			}, {
+				id: 2,
+				name: '2',
+				income: '$2',
+				outcome:'$1',
+				type: '$2',
+				date: '2015',
+				tag: '',
+			},
+			{
+				id: 3,
+				name: '3',
+				income: '$3',
+				outcome:'$1',
+				type: '$3',
+				date: '2022',
+				tag: '',
+			}
+		]
+	});
+	$("#aaa").click(function() {
+		$('.info').css('display', 'block');
+		$('.mask').css('display', 'block');
+	});
+	$(".mask").click(function() {
+		$('.info').css('display', 'none');
+		$('.mask').css('display', 'none');
+	});
+</script>
